@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramadhan Mubarak</title>
+    <title>Ramadhan Mubarak 2026 - Ilham Dwi P.N</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #dfbd69;
-            --dark-green: #062c21;
-            --light-green: #0a4d3c;
+            --light-gold: #ffebbc;
+            --dark-green: #041d16;
+            --mid-green: #0a4d3c;
         }
 
         body {
@@ -19,116 +20,145 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: radial-gradient(circle at center, var(--light-green), var(--dark-green));
+            background: linear-gradient(-45deg, #041d16, #0a4d3c, #062c21, #041d16);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             font-family: 'Poppins', sans-serif;
             color: white;
             overflow: hidden;
         }
 
-        /* Efek Bintang Kelap-kelip */
-        .stars {
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #canvas-stars {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            z-index: 1;
+            pointer-events: none;
         }
 
-        /* Ornamen Lampion CSS */
+        /* Lampion Modern */
         .lantern {
             position: absolute;
-            width: 50px;
-            height: 70px;
+            width: 40px;
+            height: 60px;
             background: var(--gold);
             border-radius: 10px;
-            top: -20px;
-            animation: swing 3s ease-in-out infinite alternate;
+            top: -10px;
+            z-index: 5;
+            animation: swing 3s ease-in-out infinite alternate, glow 2s infinite alternate;
             transform-origin: top center;
-            box-shadow: 0 0 20px rgba(223, 189, 105, 0.5);
+            box-shadow: 0 0 20px var(--gold);
+            border: 2px solid var(--light-gold);
         }
-        .lantern::before {
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px var(--gold); opacity: 0.8; }
+            to { box-shadow: 0 0 30px var(--gold); opacity: 1; }
+        }
+
+        .lantern::after {
             content: "";
             position: absolute;
-            top: -40px;
+            bottom: -15px;
             left: 50%;
             width: 2px;
-            height: 40px;
+            height: 20px;
             background: var(--gold);
         }
-        .lantern-left { left: 15%; }
-        .lantern-right { right: 15%; animation-delay: 1s; }
+
+        .lantern-left { left: 10%; animation-delay: 0.5s; }
+        .lantern-right { right: 10%; }
 
         @keyframes swing {
-            from { transform: rotate(-5deg); }
-            to { transform: rotate(5deg); }
+            from { transform: rotate(-8deg); }
+            to { transform: rotate(8deg); }
         }
 
-        /* Frame Utama (Glassmorphism) */
         .card {
             position: relative;
             z-index: 10;
             width: 90%;
             max-width: 450px;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border: 2px solid var(--gold);
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(223, 189, 105, 0.4);
+            border-radius: 40px;
             text-align: center;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-        }
-
-        /* Ornamen Kubah Masjid di Background */
-        .card::after {
-            content: "🕌";
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 150px;
-            opacity: 0.1;
-            z-index: -1;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
 
         .moon {
-            font-size: 60px;
-            color: var(--gold);
-            filter: drop-shadow(0 0 10px var(--gold));
-            margin-bottom: 10px;
-            display: block;
+            font-size: 70px;
+            filter: drop-shadow(0 0 15px var(--gold));
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         h1 {
             font-family: 'Amiri', serif;
             color: var(--gold);
-            font-size: 32px;
+            font-size: 36px;
             margin: 10px 0;
-            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(223, 189, 105, 0.5);
         }
 
+        /* Countdown Style */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .countdown-item {
+            background: rgba(223, 189, 105, 0.15);
+            padding: 10px;
+            border-radius: 15px;
+            flex: 1;
+            border: 1px solid rgba(223, 189, 105, 0.3);
+        }
+        .countdown-item span {
+            display: block;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .countdown-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+
         .typing-text {
-            font-size: 16px;
-            min-height: 50px;
-            color: #eee;
+            font-size: 14px;
+            min-height: 40px;
+            color: #e0e0e0;
+            margin-bottom: 20px;
         }
 
         .btn {
-            margin-top: 25px;
             background: linear-gradient(45deg, #dfbd69, #926d15);
             border: none;
-            padding: 12px 30px;
+            padding: 15px 30px;
             border-radius: 50px;
-            color: #222;
-            font-weight: 600;
+            color: #1a1a1a;
+            font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(146, 109, 21, 0.4);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            width: 100%;
         }
 
         .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(146, 109, 21, 0.6);
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(223, 189, 105, 0.4);
         }
 
         #extraMessage {
@@ -136,73 +166,150 @@
             margin-top: 20px;
             font-size: 14px;
             line-height: 1.6;
-            border-top: 1px solid rgba(223, 189, 105, 0.3);
-            padding-top: 15px;
-            animation: fadeIn 1s;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--gold);
+            animation: fadeIn 0.5s ease-in;
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .footer {
-            margin-top: 30px;
-            font-size: 12px;
+            margin-top: 25px;
+            font-size: 10px;
             color: var(--gold);
-            letter-spacing: 2px;
+            letter-spacing: 4px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-    <div class="stars" id="starContainer"></div>
+    <canvas id="canvas-stars"></canvas>
     
     <div class="lantern lantern-left"></div>
     <div class="lantern lantern-right"></div>
 
     <div class="card">
         <span class="moon">🌙</span>
-        <h1>Marhaban Ya Ramadhan</h1>
+        <h1 id="title">Ramadhan Kareem</h1>
         
-        <div class="typing-text" id="typewriter"></div>
-        
-        <button class="btn" onclick="showPesan()">Lihat Pesan Lengkap</button>
-        
-        <div id="extraMessage">
-            Semoga di bulan yang suci ini, setiap langkah kita diberkahi, doa-doa kita diijabah, dan hati kita kembali fitrah. Mohon maaf lahir dan batin ya! ✨
+        <div class="countdown" id="countdown-box">
+            <div class="countdown-item"><span id="days">00</span><div class="countdown-label">Hari</div></div>
+            <div class="countdown-item"><span id="hours">00</span><div class="countdown-label">Jam</div></div>
+            <div class="countdown-item"><span id="minutes">00</span><div class="countdown-label">Menit</div></div>
+            <div class="countdown-item"><span id="seconds">00</span><div class="countdown-label">Detik</div></div>
         </div>
 
-        <div class="footer">— ILHAM DWI P.N —</div>
+        <div class="typing-text" id="typewriter"></div>
+        
+        <button class="btn" onclick="showPesan()">Buka Pesan Keberkahan</button>
+        
+        <div id="extraMessage">
+            "Bulan Ramadhan adalah bulan yang di dalamnya diturunkan Al-Quran sebagai petunjuk bagi manusia."<br><br>
+            <b>Ilham Dwi P.N</b> mengucapkan Mohon Maaf Lahir & Batin. Semoga puasa kita tahun ini diterima Allah SWT. Amin! 🕌✨
+        </div>
+
+        <div class="footer">EST. 2026 • ILHAM DWI P.N</div>
     </div>
 
     <script>
-        // Membuat bintang secara acak
-        const container = document.getElementById('starContainer');
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.style.position = 'absolute';
-            star.style.width = '2px';
-            star.style.height = '2px';
-            star.style.background = 'white';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.opacity = Math.random();
-            star.style.borderRadius = '50%';
-            container.appendChild(star);
+        // --- LOGIKA HITUNG MUNDUR REAL-TIME ---
+        // Target: Estimasi Ramadhan 1447 H (Sekitar 18 Februari 2026)
+        const targetDate = new Date("February 18, 2026 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('countdown-box').innerHTML = "<h2 style='color:var(--gold)'>Selamat Menunaikan Ibadah Puasa!</h2>";
+                document.getElementById('title').innerText = "Ramadhan Mubarak";
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // --- EFEK PARTIKEL BINTANG ---
+        const canvas = document.getElementById('canvas-stars');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random();
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0 || this.y > canvas.height || this.y < 0) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(223, 189, 105, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        // Efek Mengetik
-        const text = "Mari sambut bulan penuh berkah dengan hati yang bersih dan penuh kegembiraan...";
+        function init() {
+            for (let i = 0; i < 100; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        init();
+        animate();
+
+        // --- EFEK MENGETIK ---
+        const text = "Menanti detik-detik penuh rahmat, mari siapkan diri lahir dan batin...";
         let j = 0;
         function type() {
             if (j < text.length) {
                 document.getElementById("typewriter").innerHTML += text.charAt(j);
                 j++;
-                setTimeout(type, 50);
+                setTimeout(type, 60);
             }
         }
 
         function showPesan() {
             const msg = document.getElementById("extraMessage");
             msg.style.display = (msg.style.display === "block") ? "none" : "block";
+            if(msg.style.display === "block") {
+                 // Efek kembang api sederhana saat klik (opsional visual feedback)
+                 ctx.fillStyle = "white";
+                 ctx.fillRect(0,0, canvas.width, canvas.height); 
+            }
         }
 
         window.onload = type;

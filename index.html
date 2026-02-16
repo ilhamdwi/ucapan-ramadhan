@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ramadhan Mubarak 2026 - Ilham Dwi P.N</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -21,12 +21,14 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            /* Support untuk layar panjang seperti Android modern */
+            min-height: -webkit-fill-available; 
             background: linear-gradient(-45deg, #041d16, #0a4d3c, #062c21, #041d16);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             font-family: 'Poppins', sans-serif;
             color: white;
-            overflow: hidden;
+            overflow-x: hidden; /* Mencegah horizontal scroll */
         }
 
         @keyframes gradientBG {
@@ -44,36 +46,34 @@
         /* --- LAMPION ISLAMI (FANOUS) --- */
         .lantern-container {
             position: absolute;
-            top: -20px;
+            top: -10px;
             z-index: 5;
             transform-origin: top center;
             animation: swing 3s ease-in-out infinite alternate;
         }
 
-        .lantern-left { left: 10%; animation-delay: 0.5s; }
-        .lantern-right { right: 10%; }
+        .lantern-left { left: 5%; }
+        .lantern-right { right: 5%; }
 
         .fanous {
-            width: 45px;
-            height: 70px;
+            width: 35px;
+            height: 55px;
             background: var(--gold);
             clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
             position: relative;
-            box-shadow: 0 0 20px var(--lantern-glow);
+            box-shadow: 0 0 15px var(--lantern-glow);
             border: 1px solid var(--light-gold);
         }
 
-        /* Ornamen di dalam lentera */
         .fanous::before {
             content: "☪";
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             color: rgba(0,0,0,0.5);
-            font-size: 24px;
+            font-size: 18px;
         }
 
-        /* Efek cahaya api di dalam */
         .fanous-inner {
             position: absolute;
             top: 15%; left: 15%;
@@ -84,8 +84,8 @@
         }
 
         .lantern-wire {
-            width: 2px;
-            height: 50px;
+            width: 1px;
+            height: 40px;
             background: var(--gold);
             margin: 0 auto;
         }
@@ -96,27 +96,29 @@
         }
 
         @keyframes swing {
-            from { transform: rotate(-6deg); }
-            to { transform: rotate(6deg); }
+            from { transform: rotate(-5deg); }
+            to { transform: rotate(5deg); }
         }
 
-        /* --- KONTEN KARTU --- */
+        /* --- KONTEN KARTU (Responsive Card) --- */
         .card {
             position: relative;
             z-index: 10;
-            width: 90%;
-            max-width: 450px;
-            padding: 40px;
+            width: 85%;
+            max-width: 420px;
+            padding: 30px 20px;
+            margin: 20px;
             background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px); /* Safari support */
             border: 1px solid rgba(223, 189, 105, 0.4);
-            border-radius: 40px;
+            border-radius: 30px;
             text-align: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
         .moon {
-            font-size: 70px;
+            font-size: 50px;
             filter: drop-shadow(0 0 15px var(--gold));
             display: inline-block;
             animation: float 4s ease-in-out infinite;
@@ -124,112 +126,123 @@
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
         }
 
         h1 {
             font-family: 'Amiri', serif;
             color: var(--gold);
-            font-size: 36px;
+            font-size: 28px;
             margin: 10px 0;
-            text-shadow: 0 0 10px rgba(223, 189, 105, 0.5);
+            text-shadow: 0 0 10px rgba(223, 189, 105, 0.3);
         }
 
         .bedug-container {
-            margin: 20px auto;
+            margin: 15px auto;
             cursor: pointer;
             position: relative;
             display: inline-block;
+            touch-action: manipulation; /* Optimasi tap di mobile */
         }
         .bedug-icon {
-            font-size: 80px;
+            font-size: 60px;
             display: block;
             filter: drop-shadow(0 0 10px var(--gold));
         }
-        .bedug-container:active { transform: scale(1.1); }
         
         .hit-ripple {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 100px; height: 100px;
+            width: 80px; height: 80px;
             background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
             border-radius: 50%;
             opacity: 0;
             pointer-events: none;
         }
 
+        /* Countdown Style (Flexible Grid) */
         .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
             margin: 20px 0;
         }
         .countdown-item {
-            background: rgba(223, 189, 105, 0.15);
-            padding: 10px;
-            border-radius: 15px;
-            flex: 1;
-            border: 1px solid rgba(223, 189, 105, 0.3);
+            background: rgba(223, 189, 105, 0.12);
+            padding: 10px 5px;
+            border-radius: 12px;
+            border: 1px solid rgba(223, 189, 105, 0.2);
         }
         .countdown-item span {
             display: block;
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--gold);
         }
-        .countdown-label { font-size: 10px; text-transform: uppercase; }
+        .countdown-label { font-size: 9px; text-transform: uppercase; opacity: 0.8; }
 
         .salaman-icon {
-            font-size: 50px;
-            margin: 15px 0;
+            font-size: 40px;
+            margin: 10px 0;
             animation: handshakePulse 2s infinite;
         }
 
-        @keyframes handshakePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
         .typing-text {
-            font-size: 14px;
+            font-size: 13px;
             min-height: 40px;
             color: #e0e0e0;
-            margin-bottom: 20px;
+            line-height: 1.5;
+            margin-bottom: 15px;
         }
 
         .btn {
             background: linear-gradient(45deg, #dfbd69, #926d15);
             border: none;
-            padding: 15px 30px;
+            padding: 12px 20px;
             border-radius: 50px;
             color: #1a1a1a;
             font-weight: 700;
+            font-size: 14px;
             cursor: pointer;
-            transition: 0.3s;
             width: 100%;
+            transition: 0.3s;
         }
 
         #extraMessage {
             display: none;
-            margin-top: 20px;
-            font-size: 14px;
+            margin-top: 15px;
+            font-size: 13px;
             line-height: 1.6;
             background: rgba(0,0,0,0.3);
-            padding: 20px;
-            border-radius: 20px;
+            padding: 15px;
+            border-radius: 15px;
             border: 1px solid var(--gold);
-            animation: fadeIn 0.5s ease-in;
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
         .footer {
-            margin-top: 25px;
-            font-size: 10px;
+            margin-top: 20px;
+            font-size: 9px;
             color: var(--gold);
-            letter-spacing: 4px;
+            letter-spacing: 2px;
             font-weight: 600;
+        }
+
+        /* --- MEDIA QUERIES UNTUK SCREEN BESAR (Tablet/Desktop) --- */
+        @media (min-width: 600px) {
+            h1 { font-size: 36px; }
+            .moon { font-size: 70px; }
+            .bedug-icon { font-size: 80px; }
+            .countdown-item span { font-size: 24px; }
+            .fanous { width: 45px; height: 70px; }
+            .card { padding: 40px; }
+        }
+
+        /* --- FIX UNTUK IPHONE/MOBILE PENDEK --- */
+        @media (max-height: 600px) {
+            .lantern-container { display: none; } /* Sembunyikan lampion agar tidak tumpang tindih */
+            .card { margin-top: 10px; padding: 20px; }
+            .moon { font-size: 40px; }
         }
     </style>
 </head>
@@ -253,7 +266,7 @@
         <div class="bedug-container" onclick="playBedugEffect()">
             <div id="ripple" class="hit-ripple"></div>
             <span class="bedug-icon">🥁</span>
-            <small style="color: var(--gold); font-size: 9px; letter-spacing: 1px;">TAP UNTUK TABUH</small>
+            <small style="color: var(--gold); font-size: 8px; letter-spacing: 1px;">TAP UNTUK TABUH</small>
         </div>
 
         <div class="countdown" id="countdown-box">
@@ -278,25 +291,30 @@
     </div>
 
     <script>
+        // Bedug Effect
         function playBedugEffect() {
             const ripple = document.getElementById('ripple');
             ripple.style.opacity = '1';
-            ripple.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            ripple.style.transform = 'translate(-50%, -50%) scale(1.6)';
             setTimeout(() => {
                 ripple.style.opacity = '0';
                 ripple.style.transform = 'translate(-50%, -50%) scale(1)';
-            }, 200);
+            }, 250);
+            if (navigator.vibrate) navigator.vibrate(50); // Vibrasi pada Android
         }
 
+        // Countdown Real-time (Target: 18 Feb 2026)
         const targetDate = new Date("February 18, 2026 00:00:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
             const diff = targetDate - now;
+
             if (diff <= 0) {
-                document.getElementById('countdown-box').innerHTML = "<h2 style='color:var(--gold)'>Selamat Menunaikan Ibadah Puasa!</h2>";
+                document.getElementById('countdown-box').innerHTML = "<h3 style='color:var(--gold); grid-column: span 4;'>Selamat Berpuasa!</h3>";
                 return;
             }
+
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -310,10 +328,15 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
+        // Canvas Stars
         const canvas = document.getElementById('canvas-stars');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        
+        function resize() { 
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight; 
+        }
         window.addEventListener('resize', resize);
         resize();
 
@@ -322,9 +345,9 @@
             reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * 0.4 - 0.2;
+                this.size = Math.random() * 1.5;
+                this.speedX = Math.random() * 0.2 - 0.1;
+                this.speedY = Math.random() * 0.2 - 0.1;
                 this.opacity = Math.random();
             }
             update() {
@@ -336,7 +359,7 @@
                 ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
             }
         }
-        function init() { for (let i = 0; i < 100; i++) particles.push(new Particle()); }
+        function init() { for (let i = 0; i < 80; i++) particles.push(new Particle()); }
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
@@ -344,19 +367,23 @@
         }
         init(); animate();
 
-        const text = "Menanti detik-detik penuh rahmat, mari siapkan diri lahir dan batin...";
+        // Typewriter Effect
+        const text = "Mari sambut bulan penuh berkah dengan hati yang suci...";
         let j = 0;
         function type() {
             if (j < text.length) {
                 document.getElementById("typewriter").innerHTML += text.charAt(j);
                 j++;
-                setTimeout(type, 60);
+                setTimeout(type, 50);
             }
         }
 
         function showPesan() {
             const msg = document.getElementById("extraMessage");
             msg.style.display = (msg.style.display === "block") ? "none" : "block";
+            if (msg.style.display === "block") {
+                msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
         window.onload = type;
     </script>
